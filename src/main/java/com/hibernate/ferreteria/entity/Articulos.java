@@ -15,4 +15,8 @@ public class Articulos {
     private Double precio;
     private Integer existencia;
 
+    @Override
+    public String toString() {
+        return "Articulo{" + "id = " + id + ", Nombrearticulo: '" + nombrearticulo + '\'' + ",precio: " + precio + ", existencia: " + existencia + '}';
+    }
 }
