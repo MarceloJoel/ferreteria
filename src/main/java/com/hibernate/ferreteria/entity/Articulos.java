@@ -17,7 +17,7 @@ public class Articulos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)     //Genera automaticamente los ids
 
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "nombrearticulo")
     private String nombrearticulo;

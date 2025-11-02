@@ -1,23 +1,23 @@
 package com.hibernate.ferreteria.DTOs;
 
 public class ArticulosDTO {
-    private long id;
+    private Long id;
     private String nombrearticulo;
     private Double precio;
     private Integer existencia;
 
-    public ArticulosDTO(long id, String nombrearticulo, Double precio, Integer existencia) {
+    public ArticulosDTO(Long id, String nombrearticulo, Double precio, Integer existencia) {
         this.id = id;
         this.nombrearticulo = nombrearticulo;
         this.precio = precio;
         this.existencia = existencia;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

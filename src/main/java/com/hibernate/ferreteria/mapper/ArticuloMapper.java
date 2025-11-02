@@ -15,7 +15,7 @@ public class ArticuloMapper {
 
     public static Articulos toEntity(ArticulosDTO dto) {
         Articulos articulos = new Articulos();
-        articulos.setId((int) dto.getId());
+        articulos.setId(dto.getId());
         articulos.setNombrearticulo(dto.getNombrearticulo());
         articulos.setPrecio(dto.getPrecio());
         articulos.setExistencia(dto.getExistencia());

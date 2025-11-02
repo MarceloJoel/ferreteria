@@ -3,9 +3,7 @@ package com.hibernate.ferreteria.controladores;
 import com.hibernate.ferreteria.DTOs.ArticulosDTO;
 import com.hibernate.ferreteria.servicios.ArticuloService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,8 +16,18 @@ public class ArticuloController {
     private ArticuloService servicio;
 
     @GetMapping
-    public List<ArticulosDTO> listar(){
-        return servicio.Consulta();
+    public List<ArticulosDTO> listar() {
+        return servicio.serv_consulta();
+    }
+
+    @PostMapping
+    public ArticulosDTO insertaArticulo(@RequestBody ArticulosDTO dto) {
+        return servicio.serv_inserta(dto);
+    }
+
+    @PutMapping
+    public ArticulosDTO actualizaArticulo(@PathVariable Long id, @RequestBody ArticulosDTO dto) {
+        return servicio.serv_actualiza(id, dto);
     }
 
 }
