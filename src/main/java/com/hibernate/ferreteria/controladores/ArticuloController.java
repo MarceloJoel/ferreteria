@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/articulos")
 public class ArticuloController {
@@ -19,6 +20,12 @@ public class ArticuloController {
     public List<ArticulosDTO> listar() {
         return servicio.serv_consulta();
     }
+
+    @GetMapping("/{id}")
+    public ArticulosDTO buscaId(@PathVariable Long id) {
+        return servicio.serv_buscaId(id);
+    }
+
 
     @PostMapping
     public ArticulosDTO insertaArticulo(@RequestBody ArticulosDTO dto) {

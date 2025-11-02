@@ -22,6 +22,11 @@ public class ArticuloService {
         return repo.findAll().stream().map(ArticuloMapper::toDTO).collect(Collectors.toList());
     }
 
+    public ArticulosDTO serv_buscaId(Long id) {
+        Articulos articuloporId = repo.findById(id).orElseThrow(() -> new RuntimeException("Articulo no encontrado con id: " + id));
+        return ArticuloMapper.toDTO(articuloporId);
+    }
+
     public ArticulosDTO serv_inserta(ArticulosDTO dto) {
         Articulos articulo = ArticuloMapper.toEntity(dto);
         Articulos insertado = repo.save(articulo);
