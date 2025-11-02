@@ -45,5 +45,12 @@ public class ArticuloService {
         }
     }
 
-
+    public String eliminaArticulos(Long id) {
+        if (repo.existsById(id)) {
+            repo.deleteById(id);
+            return "Articulo eliminado con id: " + id;
+        } else {
+            return "Articulo: " + id + " no encontrado";
+        }
+    }
 }

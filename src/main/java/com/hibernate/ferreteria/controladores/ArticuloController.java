@@ -30,4 +30,9 @@ public class ArticuloController {
         return servicio.serv_actualiza(id, dto);
     }
 
+    @DeleteMapping("/{id}")
+    public String borrArticulos(@PathVariable Long id) {
+        return servicio.eliminaArticulos(id);
+    }
+
 }
