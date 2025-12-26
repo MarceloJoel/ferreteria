@@ -28,16 +28,16 @@ public class SecurityConfig{
     @Bean
     public SecurityFilterChain securityChain(HttpSecurity http)
             throws Exception{
-             http.
+            http.
                 csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
                 .securityMatcher("/**")
-                     .addFilterBefore(
-                             new BasicAuthenticationFilter(
-                                     http.getSharedObject(AuthenticationManager.class)
-                             ),
-                             UsernamePasswordAuthenticationFilter.class
-                     );
+                    .addFilterBefore(
+                            new BasicAuthenticationFilter(
+                                    http.getSharedObject(AuthenticationManager.class)
+                            ),
+                            UsernamePasswordAuthenticationFilter.class
+                    );
 
 
                     return http.build();
