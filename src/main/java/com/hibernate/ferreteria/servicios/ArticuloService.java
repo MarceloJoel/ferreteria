@@ -28,9 +28,9 @@ public class ArticuloService {
     }
 
     public ArticulosDTO serv_inserta(ArticulosDTO dto) {
-        Articulos articulo = ArticuloMapper.toEntity(dto);
-        Articulos insertado = repo.save(articulo);
-        return ArticuloMapper.toDTO(insertado);
+        Articulos articulo = ArticuloMapper.toEntity(dto);  //Se convierte en entidad
+        Articulos insertado = repo.save(articulo);          //Se envia a la tabla de la bd
+        return ArticuloMapper.toDTO(insertado);             //Se returna el objeto a DTO
     }
 
     public ArticulosDTO serv_actualiza(Long id, ArticulosDTO dto) {
