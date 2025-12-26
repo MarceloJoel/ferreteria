@@ -1,4 +1,5 @@
 package com.hibernate.ferreteria.servicios;
+
 import com.hibernate.ferreteria.repositorios.Repo_usuarios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,13 +19,13 @@ public class UsuarioService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String nombreUsuario)
-                throws UsernameNotFoundException{
-            var usuario = repoUsuarios.findByUsername(nombreUsuario)
+            throws UsernameNotFoundException {
+        var usuario = repoUsuarios.findByUsername(nombreUsuario)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado" + usuario));
 
-                return new User(usuario.getUsuario(), usuario.getPassword(),
-                    List.of(new SimpleGrantedAuthority("Role_" + usuario.getRol())));
-        
+        return new User(usuario.getUsuario(), usuario.getPassword(),
+                List.of(new SimpleGrantedAuthority("Role_" + usuario.getRol())));
+
     }
-    
+
 }
