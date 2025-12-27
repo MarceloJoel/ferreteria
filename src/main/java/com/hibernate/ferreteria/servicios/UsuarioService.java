@@ -14,18 +14,18 @@ import java.util.List;
 @Service
 public class UsuarioService implements UserDetailsService {
 
-    @Autowired
-    private Repo_usuarios repoUsuarios;
+        @Autowired
+        private Repo_usuarios repoUsuarios;
 
-    @Override
-    public UserDetails loadUserByUsername(String nombreUsuario)
-            throws UsernameNotFoundException {
-        var usuario = repoUsuarios.findByUsername(nombreUsuario)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado" + usuario));
+        @Override
+        public UserDetails loadUserByUsername(String nombreUsuario)
+                        throws UsernameNotFoundException {
+                var usuario = repoUsuarios.findByUsername(nombreUsuario)
+                                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado" + usuario));
 
-        return new User(usuario.getUsuario(), usuario.getPassword(),
-                List.of(new SimpleGrantedAuthority("Role_" + usuario.getRol())));
+                return new User(usuario.getUsuario(), usuario.getPassword(),
+                                List.of(new SimpleGrantedAuthority("Role_" + usuario.getRol())));
 
-    }
+        }
 
 }
