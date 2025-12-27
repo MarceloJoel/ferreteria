@@ -41,13 +41,14 @@ public class SecurityConfig {
             throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("*/api/auth/**").permitAll()
-                    .requestMatchers("*/api/articulos/**").hasAnyRole("ADMIN","USER")
-                    .anyRequest().authenticated())
+                        .requestMatchers("*/api/auth/**").permitAll()
+                        .requestMatchers("*/api/articulos/**").hasAnyRole("ADMIN", "USER")
+                        .anyRequest().authenticated())
                 .authenticationManager(authManger)
                 .userDetailsService(userService)
                 .formLogin(form -> form.permitAll())
-                .httpBasic(basic -> {});
+                .httpBasic(basic -> {
+                });
 
         return http.build();
     }
