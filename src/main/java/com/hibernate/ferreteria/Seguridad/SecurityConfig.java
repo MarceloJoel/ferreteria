@@ -1,4 +1,5 @@
 package com.hibernate.ferreteria.Seguridad;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,37 +12,45 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import com.hibernate.ferreteria.servicios.UsuarioService;
+
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
+public class SecurityConfig {
+
+    private final UsuarioService userService;
+
+    public SecurityConfig(UsuarioService userService) {
+        this.userService = userService;
+    }
+
     @Bean
-    public PasswordEncoder codificaPass(){
+    public PasswordEncoder codificaPass() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
     public AuthenticationManager autenticacion(AuthenticationConfiguration authConfig)
-        throws Exception{
+            throws Exception {
         return authConfig.getAuthenticationManager();
     }
 
     @Bean
-    public SecurityFilterChain securityChain(HttpSecurity http)
-            throws Exception{
-            http.
-                csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-                .securityMatcher("/**")
-                    .addFilterBefore(
-                            new BasicAuthenticationFilter(
-                                    http.getSharedObject(AuthenticationManager.class)
-                            ),
-                            UsernamePasswordAuthenticationFilter.class
-                    );
+    public SecurityFilterChain securityChain(HttpSecurity http,
+            AuthenticationManager authManger)
+            throws Exception {
+        http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("*/api/auth/**").permitAll()
+                        .requestMatchers("*/api/articulos/**").hasAnyRole("ADMIN", "USER")
+                        .anyRequest().authenticated())
+                .authenticationManager(authManger)
+                .userDetailsService(userService)
+                .formLogin(form -> form.permitAll())
+                .httpBasic(basic -> {
+                });
 
-
-                    return http.build();
+        return http.build();
     }
-
 
 }
