@@ -20,8 +20,9 @@ public class UsuarioService implements UserDetailsService {
         @Override
         public UserDetails loadUserByUsername(String nombreUsuario)
                         throws UsernameNotFoundException {
-                var usuario = repoUsuarios.findByUsername(nombreUsuario)
-                                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado" + usuario));
+                var usuario = repoUsuarios.findByUsuario(nombreUsuario)
+                                .orElseThrow(() -> new UsernameNotFoundException(
+                                                "Usuario no encontrado" + nombreUsuario));
 
                 return new User(usuario.getUsuario(), usuario.getPassword(),
                                 List.of(new SimpleGrantedAuthority("Role_" + usuario.getRol())));
